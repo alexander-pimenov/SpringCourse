@@ -13,6 +13,12 @@
           class="ru.alishev.springcourse.ClassicalMusic">
     </bean>
 
+	<!-- Если мы не укажем scope="prototype", то будет создаваться по умолчанию
+	только один бин MusicPlayer, т.к. по умолчанию стоит scope Singleton. 
+	И все разы, когда в TestSpring будем вызывать context.getBean(),
+	будем получать указатель на один и тот же объект!!! 
+	В нашем случае, при вызове context.getBean() мы получаем разные объекты.
+	-->
     <bean id="musicPlayer"
           class="ru.alishev.springcourse.MusicPlayer"
           scope="prototype">
