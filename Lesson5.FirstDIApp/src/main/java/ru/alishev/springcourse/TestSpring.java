@@ -6,18 +6,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author Neil Alishev
  */
 public class TestSpring {
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml"
-        );
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        // Music music = context.getBean("musicBean", Music.class);
-        // MusicPlayer musicPlayer = new MusicPlayer(music);
+		// Эти две строчки уже не нужны, т.к. зависимости прописаны в файле
+		// applicationContext.xml
+		// Music music = context.getBean("musicBean", Music.class);
+		// MusicPlayer musicPlayer = new MusicPlayer(music);
 
-        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+		//Обращаемся к нашему контексту. И получаем MusicPlayer из контекста.
+		MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
-        musicPlayer.playMusic();
+		musicPlayer.playMusic();
 
-        context.close();
-    }
+		context.close();
+	}
 }

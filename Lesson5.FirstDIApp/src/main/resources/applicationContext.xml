@@ -10,7 +10,20 @@
     <bean id="musicBean"
           class="ru.alishev.springcourse.ClassicalMusic">
     </bean>
+    
+    <!-- <bean id="musicBean"
+          class="ru.alishev.springcourse.RockMusic">
+    </bean>
+    -->
 
+	<!-- Создаем еще один бин для автоматического внедрения зависимостей.
+	Т.к. у класса MusicPlayer есть конструктор с параметром, то не 
+	забываем указать его с помощью тега <constructor-arg ref="musicBean"/> и
+	конечно же передаем ему в параметр объект с id = musicBean, т.е. будет передан
+	объект интерфейса Music, вернее один из объектов класса, который реализует этот
+	интерфейс.
+	Здесь ref="musicBean" - это ссылка на бин с id="musicBean" 
+	-->
     <bean id="musicPlayer"
           class="ru.alishev.springcourse.MusicPlayer">
         <constructor-arg ref="musicBean"/>
