@@ -9,6 +9,13 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
+    <!-- В названиях для init-method="doMyInit" и destroy-method="doMyDestroy" 
+    обязательно должны совпадать методы из класса ClassicalMusic. -->
+    <!-- scope="prototype" -->
+    <!-- Также укажем Спрингу, что он не должен пытаться создавать новый
+    объект ClassicalMusic с помощью ключевого слова new. Для этого есть 
+    специальный фабричный метод factory-method="getClassicalMusic" 
+    Т.е. для создания бина ClassicalMusic он вызовет теперь метод getClassicalMusic -->
     <bean id="musicBean"
           class="ru.alishev.springcourse.ClassicalMusic"
           init-method="doMyInit"
