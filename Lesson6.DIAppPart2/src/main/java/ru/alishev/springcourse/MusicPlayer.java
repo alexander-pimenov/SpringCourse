@@ -6,13 +6,17 @@ package ru.alishev.springcourse;
 public class MusicPlayer {
     private Music music;
 
+    //Название нашего музыкального плеера.
     private String name;
+    
+    //Значение громкости.
     private int volume;
 
     public String getName() {
         return name;
     }
 
+    //Сеттер для назначения названия плеера.
     public void setName(String name) {
         this.name = name;
     }
@@ -21,6 +25,7 @@ public class MusicPlayer {
         return volume;
     }
 
+  //Сеттер для назначения громкости.
     public void setVolume(int volume) {
         this.volume = volume;
     }
@@ -30,6 +35,8 @@ public class MusicPlayer {
         this.music = music;
     }
 
+    //Конструктор без аргументов ДОЛЖЕН быть обязательно,
+    //Если используем сеттеры для внедрения зависимостей.
     public MusicPlayer() {}
 
     public void setMusic(Music music) {

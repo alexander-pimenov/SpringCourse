@@ -1,24 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+	<!-- Файл musicPlayer.properties импортирует в applicationContext.
+	И в качестве положения location указываем размещения нашего файла.
+	Переменная classpath: говорит, что файл лежит в папке /Lesson6.DIAppPart2/src/main/resources.
+	Т.обр. Спринг найдет это файл с двумя нашими значениями.
+	В файле musicPlayer.properties запись ведется в формате ключ:значение.
+	Т.е. по ключу "musicPlayer.name" мы получим значение "Some name" -->
+	<context:property-placeholder
+		location="classpath:musicPlayer.properties" />
 
-    <bean id="musicBean"
-          class="ru.alishev.springcourse.ClassicalMusic">
-    </bean>
+	<bean id="musicBean"
+		class="ru.alishev.springcourse.ClassicalMusic">
+	</bean>
 
-    <bean id="musicPlayer"
-          class="ru.alishev.springcourse.MusicPlayer">
-        <property name="music" ref="musicBean"/>
+	<!-- Вместо этого тега будем использовать тег, показанный ниже. 
+	<bean id="musicPlayer" 
+		class="ru.alishev.springcourse.MusicPlayer"> 
+		<constructor-arg ref="musicBean"/> 
+	</bean> 
+	-->
 
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+	<!-- <property name="music" ref="musicBean"/> указывает назначение для сеттера 
+		в отличие от <constructor-arg ref="musicBean"/>, который указывает назначение 
+		для конструктора. 
+		name="music" - это имя сеттера setMusic.
+		ref="musicBean" - это ссылка на тот бин, который мы хотим использовать в качестве зависимости.
+		Т.е. это ссылочное значение.
+		В отличие от верхнего закомментированного кода, где использовался конструктор с параметром, и в
+		него передавался ref="musicBean",
+		тут будет использоваться конструктор без параметров. И затем с помощью сеттера setMusic (name="music")
+		будет внедрена зависимость в musicBean (ref="musicBean").
+		
+		Еще немного пояснения: когда Спринг читает сеттер setMusic, то он отбрасывает начало слово "set" и
+		переводит "Music" в "music" и мы получаем название сеттера "music". 
+	-->
+	<bean id="musicPlayer" class="ru.alishev.springcourse.MusicPlayer">
+		<property name="music" ref="musicBean" />
 
+	<!-- Добавляем зависимости для бина musicPlayer.
+	Спринг обращается к сеттеру "setName=>name" и этой зависимости мы передадим некоторое значение value.
+	Значение которое хотим внедрить с помощью сеттера в поле name класса MusicPlayer. 
+	И по аналогии имеем внедрение зависимости через сеттер "setVolume=>volume" внедряем зависимость в поле 
+	volume, т.е громкость.
+	Синтаксис ${} позволяет обращаться к соответствующему ключу в файле musicPlayer.properties.
+	 -->
+		<property name="name" value="${musicPlayer.name}" />
+		<property name="volume" value="${musicPlayer.volume}" />
+	</bean>
 </beans>
