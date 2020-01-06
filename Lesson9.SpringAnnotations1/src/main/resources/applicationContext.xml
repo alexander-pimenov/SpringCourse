@@ -7,6 +7,21 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- 
+    Из этого кода было удалено лишнее ручное создание бина RockMusic:
+    <bean id="musicBean"
+          class="ru.alishev.springcourse.RockMusic">
+    </bean> 
+    -->
+    
+    <!-- И добавлено нужное для Аннотаций.
+    Сканирование компонентов в Спринге.
+    Здесь указан тот пакет "ru.alishev.springcourse",
+    в котором мы хотим чтобы Спринг
+    сканировал классы на наличие аннотации Component.
+    Это будет единственная строчка в нашем конфигурационном
+    applicationContext.xml -->
+    
     <context:component-scan base-package="ru.alishev.springcourse" />
 
 </beans>

@@ -11,12 +11,16 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
+        //в качестве id используем название класса, начиная его имя с маленькой буквы.
+        //Сохраняем в переменную типа интерфейс Music
         Music music = context.getBean("rockMusic", Music.class);
 
         MusicPlayer musicPlayer = new MusicPlayer(music);
 
         musicPlayer.playMusic();
 
+        //в качестве id используем название класса, начиная его имя с маленькой буквы.
+        //Сохраняем в переменную типа интерфейс Music
         Music music2 = context.getBean("classicalMusic", Music.class);
 
         MusicPlayer classicalMusicPlayer = new MusicPlayer(music2);
