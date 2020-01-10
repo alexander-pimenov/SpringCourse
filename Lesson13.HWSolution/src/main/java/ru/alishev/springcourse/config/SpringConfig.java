@@ -36,9 +36,14 @@ public class SpringConfig {
         return new JazzMusic();
     }
 
+    //это бин, который представляет из себя список из
+    //музыкальных жанров
+    //для него нет отдельного java-класса, т.к. ему нужно
+    //вернуть не объект какого то класса, а список из этих классов
     @Bean
     public List<Music> musicList() {
         // Этот лист неизменяемый (immutable)
+    	// возвращает нам список из музыкальных жанров
         return Arrays.asList(classicalMusic(), rockMusic(), jazzMusic());
     }
 
