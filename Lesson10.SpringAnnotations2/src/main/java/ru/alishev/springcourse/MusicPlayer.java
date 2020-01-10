@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MusicPlayer {
+	
     private ClassicalMusic classicalMusic;
     private RockMusic rockMusic;
 

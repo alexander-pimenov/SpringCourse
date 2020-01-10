@@ -6,16 +6,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author Neil Alishev
  */
 public class TestSpring {
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml"
-        );
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+		MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
-        musicPlayer.playMusic(MusicGenre.CLASSICAL);
-        musicPlayer.playMusic(MusicGenre.ROCK);
+		for (int i = 0; i < 10; i++) {
 
-        context.close();
-    }
+			musicPlayer.playMusic(MusicGenre.CLASSICAL);
+			musicPlayer.playMusic(MusicGenre.ROCK);
+			System.out.println("===============================");
+
+		}
+
+		context.close();
+	}
 }

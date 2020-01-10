@@ -1,0 +1,81 @@
+Вся папочная структура нашего проекта создана с помощью maven,
+создали наше приложение с использованием архитипа.
+Файл web.xml лежащий в /spring-app1/src/main/webapp/WEB-INF/web.xml
+нужен нам будет, когда мы будем создавать веб-приложение.
+Когда мы будем запускать приложение на сервере и обращаться к
+нему через браузер. Т.е. речь уже пойдет о Spring MVC.
+
+Чтобы использовать Spring Framework нам нужно в pom.xml 
+прописать нужные зависимости, т.е. нужно в зависимостях 
+указать те библиотеки, которые нужно нам использовать
+(заходим на сайт https://mvnrepository.com/ и копируем их оттуда в
+наш pom.xml):
+1. spring-core - основной из компонентов Spring Framework, это основная зависимость,
+				которая всегда используется при создании и использовании Spring приложений. 
+2. spring-beans - эта зависимость используется, когда мы доверяем Спрингу создание новых
+				объектов. И потом извлекаем эти объекты из Spring Application Context.
+3. spring-context
+
+В директории main создаем директорию resources /spring-app1/src/main/resources,
+чтобы там хранились наши ресурсы. Она должна быть помечена, что это ресурсы.
+Правый клик мыши -> Mark Directory as -> Resources Root (Это для IntelliJ IDEA)
+В этой папке будет конфигурация нашего Спринга.
+
+А в папке java будет храниться весь java-код /spring-app1/src/main/java
+А эта папка должна быть помечена, как 
+Правый клик мыши -> Mark Directory as -> Sources Root (Это для IntelliJ IDEA)
+В этой папке также сделаем ветвление, папочную структуру, для соблюдения уникальности 
+структуры: ru.alishev.springcourse
+
+Еще раз повторюсь, Спринг облегчает создание объектов.
+Т.е. в Spring Framework делегируем создание новых объектов класса.
+
+В начале изучается Spring-core то как работают зависимости между объектами,
+т.е. Dependency Injection, а потом Spring-MVC веб-приложения.
+
+Если мы хотим использовать Application Context, т.е. создание объектов
+Спрингом и потом последующее извлечение этих объектов из SpringApplicationContext
+для этого и импортируются три (выше указанные)зависимости.  
+
+
+В папке resources создаем файл applicationContext.xml.
+Это конфигурационный файл Спринга.
+Spring Framework прочитает этот файл и создаст из него бины.
+И потом бины - объекты мы достанем из него.
+В него копируем:
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="testBean"
+        class="ru.alishev.springcourse.TestBean">
+        <constructor-arg value="Neil"/>
+    </bean>
+</beans>
+В этой информации прописываем объект-бин.
+Бины - это объекты создаваемые Спрингом из класса.
+<bean...></bean>
+Его id, его class, и то что передаем в параметр конструктора класс TestBean, здесь
+это  value="Neil".
+Еще раз, Самое главное в этом файле это <bean></bean>.
+У bean есть id - уникальный идентификатор нашего объекта.
+Он у нас будет называться testBean.
+И также относится к главному - путь к классу bean который мы хотим создать.
+В нашем случае это класс TestBean. И путь пропишем так:
+class = "ru.alishev.springcourse.TestBean"
+Т.е. у нас есть класс TestBean, и если нам нужно создать 
+объект этого класса, то нужно прописать путь к этому классу.
+Также в качестве аргумента в класс в конструктор мы хотим передавать,
+какую то строку < constructor-arg  value = "Neil" />
+и эта строка будет попадать в поле name.
+
+После запуска приложения Спринг создаст объект и положит его в свой
+Application Context. И затем мы извлечем этот бин из Application Context.
+
+
+
